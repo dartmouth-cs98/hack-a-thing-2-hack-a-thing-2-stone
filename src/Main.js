@@ -14,7 +14,29 @@ export default class Main extends React.Component {
       loading: true,
       todos: [],
     };
+    this.loadTodos()
+    
   }
+  
+  save = async () => {
+    try {
+      AsyncStorage.setItem('todos', JSON.stringify(this.state.todos));
+    } catch (e) {
+      console.log('Error while storing Todo Items >', e);
+    }
+  };
+
+  loadTodos = async () => {
+    try {
+      const todos = await AsyncStorage.getItem('todos');
+      this.setState({
+        todos: JSON.parse(todos) || [],
+        loading: false
+      });
+    } catch (e) {
+      console.log("Error getting Todo Items >", e);
+    }
+  };
 
   addTodo = () => {
     if (this.state.todo.length === 0) {
@@ -34,6 +56,22 @@ export default class Main extends React.Component {
     todos.push(todo);
     this.setState({ todos, todo: '' });
   }
+
+  checkBoxToggle = (i) => {
+    const todos = this.state.todos;
+    const todo = todos[i];
+    todo.completed = !todo.completed;
+    todo.completedOn = todo.completed ? Date.now() : null;
+    todos[i] = todo;
+    this.setState({todos});
+  }
+
+  onDeleteAction = (i) => {
+    const todos = this.state.todos;
+    todos.splice(i, 1);
+    this.setState({ todos });
+  }
+
   render() {
     return (
       <LinearGradient style={{flex: 1}} colors={GlobalStyles.appBackgroundColors}>
@@ -46,7 +84,7 @@ export default class Main extends React.Component {
             placeholder='What needs to be done?'
             placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
             onChangeText={todo => this.setState({ todo }) }
-            blurOnSubmit={false}
+            blurOnSubmit={true}
             onSubmitEditing={this.addTodo}
             value={this.state.todo}
           />
