@@ -1,5 +1,5 @@
 export const styles = {
-  fontColor: '#ffffff',
+  fontcolor: '#ffffff',
   fontSize: 16,
   appBackgroundColors: ['#4776E6', '#8E54E9']
 }

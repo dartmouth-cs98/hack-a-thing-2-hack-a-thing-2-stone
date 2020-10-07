@@ -1,34 +1,86 @@
 import * as React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import Constants from 'expo-constants';
+import { LinearGradient } from 'expo-linear-gradient';
+import { styles as GlobalStyles } from './utils/styles';
+import { Header } from './components/Header';
+import { StatusBar, View, TextInput, StyleSheet, ScrollView, Text } from 'react-native';
+import Todos from './components/Todos/Todos';
 
-import { Card } from 'react-native-paper';
+export default class Main extends React.Component {
+  constructor(props) {
+    super(props);
 
-export default class App extends React.Component {
+    this.state = {
+      todo: '',
+      loading: true,
+      todos: [],
+    };
+  }
 
+  addTodo = () => {
+    if (this.state.todo.length === 0) {
+      this.setState({inputError: true});
+      return;
+    }
+    const todos = this.state.todos;
+    const todo = {
+      title: this.state.todo,
+      completed: false,
+      createdOn: Date.now(),
+      notes: '',
+      dueDate: null,
+      remindMe: false,
+      completedOn: null,
+    };
+    todos.push(todo);
+    this.setState({ todos, todo: '' });
+  }
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.paragraph}>
-          Change code in the editor and watch it change on your phone! Save to get a shareable url.
-        </Text>
-      </View>
+      <LinearGradient style={{flex: 1}} colors={GlobalStyles.appBackgroundColors}>
+        <StatusBar barStyle='light-content' />
+        <Header title='Todo App' />
+        <View style={styles.container}>
+          <TextInput 
+            style={styles.textInput} 
+            autoCapitalize='sentences'
+            placeholder='What needs to be done?'
+            placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
+            onChangeText={todo => this.setState({ todo }) }
+            blurOnSubmit={false}
+            onSubmitEditing={this.addTodo}
+            value={this.state.todo}
+          />
+          <View style={styles.todosWrp}>
+            <View style={styles.listHeaderWrp}>
+              <Text style={styles.listHeader}>Your Todos</Text>
+            </View>
+            <ScrollView>
+              <Todos 
+                todos={this.state.todos}
+                checkBoxToggle={this.checkBoxToggle}
+                onDelete={this.onDeleteAction}
+              />
+            </ScrollView>
+          </View>
+        </View>
+      </LinearGradient>
     );
   }
+  
 }
 
 const styles = StyleSheet.create({
-  container:{
-    flex: 1,
-    justifyContent: 'center',
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
-    padding: 8,
+  container: {
+    padding: 10
   },
-  paragraph: {
-    margin: 24,
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
+  textInput: {
+    color: GlobalStyles.fontColor,
+    fontSize: 28,
+    fontStyle: 'italic'
   },
+  noTodo: {
+    fontSize: GlobalStyles.fontSize,
+    color: GlobalStyles.fontColor,
+    fontWeight: 'bold'
+  }
 });

@@ -19,7 +19,9 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: GlobalStyles.fontSize,
-    fontColor: GlobalStyles.fontColor,
+    color: GlobalStyles.fontColor,
     fontWeight: '800'
   }
 });
+
+export default Header; 
