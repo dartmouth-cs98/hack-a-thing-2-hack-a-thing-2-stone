@@ -31,7 +31,7 @@ I also had some issues with Expo due to the tutorial I was following, since some
 * react-native-paper
 For each of the above (and some not mentioned), I had to try to find documentation on what the proper import types are and, in some cases, find how to install them. 
 
-Overall,  the set-up and debugging of code made this project well over 10 hours of effort for me, but it was worth it because I feel more comfortable with React Native and expo, as well as gaining some more experience in JavaScript
+Overall,  the set-up and debugging of code made this project well over 10 hours of effort for me, but it was worth it because I feel more comfortable with React Native and expo, as well as gaining some more experience in JavaScript. I found React Native and Expo to be very useful and relatively straight-forward once I figured out the set up and basic functionality. If my team decides to move forward with a mobile app, I think I would like to use React Native and Expo for development as it is not platform specific and provides some very useful tools. 
 
 
 
