@@ -4,6 +4,7 @@ import { styles as GlobalStyles } from './utils/styles';
 import { Header } from './components/Header';
 import { StatusBar, View, TextInput, StyleSheet, ScrollView, Text } from 'react-native';
 import Todos from './components/Todos/Todos';
+import { AsyncStorage } from 'react-native';
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -18,23 +19,23 @@ export default class Main extends React.Component {
     
   }
   
-  save = async () => {
-    try {
-      AsyncStorage.setItem('todos', JSON.stringify(this.state.todos));
-    } catch (e) {
-      console.log('Error while storing Todo Items >', e);
-    }
-  };
-
   loadTodos = async () => {
     try {
-      const todos = await AsyncStorage.getItem('todos');
+      let todos = await AsyncStorage.getItem('todos');
       this.setState({
         todos: JSON.parse(todos) || [],
         loading: false
       });
     } catch (e) {
       console.log("Error getting Todo Items >", e);
+    }
+  };
+
+  save = async () => {
+    try {
+      AsyncStorage.setItem('todos', JSON.stringify(this.state.todos));
+    } catch (e) {
+      console.log('Error while storing Todo Items >', e);
     }
   };
 
