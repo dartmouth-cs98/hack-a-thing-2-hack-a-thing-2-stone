@@ -20,7 +20,7 @@ The tutorials/resources I used are as follows:
 ## What I Learned
 Previously, my only experience with JavaScript was hack-a-thing-1, and that was a limited introduction that gave me the general concepts. In following my main tutorial, I was able to learn JavaScript more in depth as I had to determine where the bugs in the reference code were in order to even get my attempts to compile. I have also never used React Native or Expo so there was a rather steep learning curve of learning how to use both of these. I also changed a few aspects of the app, which provided me with a better learning by helping me do unique modifications to the code. 
 
-## How this Relates to my Team's Project/Inspire Me
+## How this Relates to my Team's Project/Inspires Me
 This relates to my team's project because we are planning to develop a mobile app to help roommate living situations. Since I have never done any coding for mobile apps, or really had any idea on where to start coding a mobile app, I thought that developing a basic app for hack-a-thing would be a good start
 
 ## What Didn't Work
